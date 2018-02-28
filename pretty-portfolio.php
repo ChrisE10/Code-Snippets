@@ -4,15 +4,13 @@ Plugin Name:  Pretty Potfolio
 Plugin URI:   
 Description:  Portfolio display plugin based on template from Cathey Dills
 Version:      1.0.0
-Author:       Chris Elliott
-Author URI:   http://vividvisuals.co.uk
+Author:       
+Author URI:   
 License:      GPL2+
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  pretty-portfolio
 Domain Path:  
 https://www.lynda.com/WordPress-tutorials/Creating-custom-post-types/508212/547133-4.html
-plugins recommended by Cathey Debug & query monitor (maybe overkill but worth mentioning)
-Turn on wp_debug
 */
 
 
