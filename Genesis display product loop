@@ -1,0 +1,67 @@
+<style>
+.play_symbol {
+	margin-left: 10px;
+}
+</style>
+
+<?php
+/**
+* Template Name: Thankyou Mauris
+* Description: Display a list of downwloads from the music category
+* 
+*/
+
+add_action('genesis_loop', 'genesis_standard_loop');
+
+remove_action( 'genesis_loop', 'genesis_do_loop' );
+add_action( 'genesis_loop', 'custom_product_loop' );
+
+/** Force the full width layout on the EDD archive page */
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+
+
+// Add custom loop
+
+
+function custom_product_loop() {
+global $paged;
+global $query_args;
+    $args = array(
+        'post_type' => 'download',
+
+    );
+
+    $downloads = get_posts( $args );
+	
+	
+
+
+	$loop = new WP_Query( $args );
+	if( $loop->have_posts() ) {
+
+		// loop through posts
+		while( $loop->have_posts() ): $loop->the_post();
+		
+		
+
+/** Display shortcode with css styling for each item */
+	echo "<div style='vivid_product_styles'>" . 
+		do_shortcode("[play symbol]") .
+		do_shortcode("[product_thunbnail]") . 
+		do_shortcode("[edd_download_title]") . 
+		do_shortcode("[purchase_link style=button]") .
+
+
+ "</div>";	
+		
+
+
+		endwhile;
+	}
+
+	wp_reset_postdata();
+
+}
+
+
+genesis();
