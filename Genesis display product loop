@@ -1,67 +1,91 @@
-<style>
-.play_symbol {
-	margin-left: 10px;
-}
-</style>
-
 <?php
+
 /**
-* Template Name: Thankyou Mauris
-* Description: Display a list of downwloads from the music category
-* 
+* Template Name: Mauris theme styling
+* Description: Listing download content horzontally.
+* Thanks to https://www.yudhistiramauris.com for helping shape the code
 */
 
+// Add our custom loop
 add_action('genesis_loop', 'genesis_standard_loop');
-
+ 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
-add_action( 'genesis_loop', 'custom_product_loop' );
-
+add_action( 'genesis_loop', 'prfx_custom_product_loop' );
+ 
 /** Force the full width layout on the EDD archive page */
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+ 
+
+?>
+        <style>
+			
+			.vivid_container {
+
+				background-color: lightgray;
+				padding-top:10px;
+				padding-bottom:0px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+
+			}
+			
+
+			.edd_download_image {
+                margin-left: 0px;
+				width: 30px;
+            }
+			
+			
+			.eddmp-player {
+				margin-left: 50px;
+				margin-top: -34;
+			}
+			
+			
+			.edd_download_title {
+                margin-left: 90px;
+				margin-top: -30;
+				font-color:black; /** Font colour not working */
+				font-size: 1.1em;
+            }
+			
+			.edd_price {
+				float: left;
+				margin-top: -19;
+				margin-left: 250px;
+            }
+			
+			.edd-submit.button {
+                float: right;
+				margin-top: -43;
+				background-color: black;
+            }
+
+        </style>
+        <?php
 
 
-// Add custom loop
-
-
-function custom_product_loop() {
-global $paged;
-global $query_args;
-    $args = array(
-        'post_type' => 'download',
-
-    );
-
-    $downloads = get_posts( $args );
 	
+
+
+/** Add the products area */
+add_action( 'genesis_loop', 'prfx_edd_downloads' );
+function prfx_edd_downloads() {
+
 	
 
+	$prfx_edd = '<h2 class="entry-title">Premium WordPress Plugins</h2>';
 
-	$loop = new WP_Query( $args );
-	if( $loop->have_posts() ) {
+	
+	$prfx_edd .= '<div class="vivid_container">';
 
-		// loop through posts
-		while( $loop->have_posts() ): $loop->the_post();
-		
-		
-
-/** Display shortcode with css styling for each item */
-	echo "<div style='vivid_product_styles'>" . 
-		do_shortcode("[play symbol]") .
-		do_shortcode("[product_thunbnail]") . 
-		do_shortcode("[edd_download_title]") . 
-		do_shortcode("[purchase_link style=button]") .
-
-
- "</div>";	
-		
-
-
-		endwhile;
-	}
-
-	wp_reset_postdata();
+	
+	$prfx_edd .= do_shortcode( '[downloads category="free" number="15" columns="1" price="no" buy_button="yes" excerpt="no" thumbnails="true"]' );
+	echo $prfx_edd;
+	
 
 }
+
 
 
 genesis();
